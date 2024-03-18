@@ -1,0 +1,90 @@
+﻿Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.AddHookAssociation.Start
+F.Intrinsic.Control.Try
+'add hook sequence
+'pass HOOK,SCRIPT,ASYNCHRONOUS,NOTES
+V.Local.sSQL.Declare(String)
+V.Local.sHook.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sSeq.Declare(String)
+V.Local.sSync.Declare(String)
+V.Local.sVersion.Declare(String)
+V.Local.sExtension.Declare(String)
+V.Local.sNotes.Declare(String)
+
+V.Local.sNotes.Set(V.Args.NOTES)
+
+F.Intrinsic.Control.If(V.Args.ASYNCHRONOUS,=,"A")
+    V.Local.sSync.Set("A")
+F.Intrinsic.Control.Else
+    V.Local.sSync.Set("S")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.File.GetExtensionComponent(V.Args.Script,V.Local.sExtension)
+F.Intrinsic.Control.If(V.Local.sExtension.UCase,=,"GAS")
+    V.Local.sVersion.Set("1.00")
+F.Intrinsic.Control.Else
+    V.Local.sVersion.Set("2.00")
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!Con.OpenCompanyConnection
+
+'first check if the script is already on the hook
+F.Intrinsic.String.LPad(V.Args.HOOK, "0",9,V.Local.sHook)
+F.Intrinsic.String.Build("select RTRIM(SEQ) SEQ from V_HOOK_ASSOCIATION where ID = '{0}' and UPPER(SCRIPT_NAME) = '{1}'",V.Local.sHook,V.Args.Script.UCase,V.Local.sSQL)
+
+F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+F.Intrinsic.Control.If(V.Ambient.ExecuteAndReturnEOF)
+    'grab top sequence
+    F.Intrinsic.String.Build("select top 1 RTRIM(SEQ) from V_HOOK_ASSOCIATION where ID = '{0}' order by seq desc",V.Local.sHook,V.Local.sSQL)
+    F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+    F.Intrinsic.Control.If(V.Ambient.ExecuteAndReturnEOF)
+        V.Local.sSeq.Set("000100")
+    F.Intrinsic.Control.Else
+        F.Intrinsic.Math.Add(V.Local.sRet.Long,100,V.Local.sSeq)
+        F.Intrinsic.String.LPad(V.Local.sSeq, "0",6,V.Local.sSeq)
+    F.Intrinsic.Control.EndIf
+    
+    'add sequence
+    'add hook sequence association does not work for some hooks for some reason
+    F.Intrinsic.String.Build("insert into HOOK_ASSOCIATION (ID,SEQ,ACTIVE_FLAG,SYNC_FLAG,SCRIPT_PATH,SCRIPT_NAME,TRACE_FLAG,SCRIPT_TYPE,RUNTIME_VER,NOTES) Values ('{0}','{1}','A','{2}','#SCRIPT-PATH#','{3}','N','G','{4}','{5}')",V.Local.sHook,V.Local.sSeq,V.Local.sSync,V.Args.Script,V.Local.sVersion,V.Local.sNotes.PSQLFriendly,V.Local.sSQL)
+F.Intrinsic.Control.Else
+    V.Local.sSeq.Set(V.Local.sRet)    
+    'sequence already exists, make sure it's active
+    'UpdateHookAssociation causes problems as well.
+    F.Intrinsic.String.Build("update HOOK_ASSOCIATION set ACTIVE_FLAG = 'A',NOTES = '{2}' where ID = '{0}' and SEQ = '{1}'",V.Local.sHook,V.Local.sSeq,V.Local.sNotes.PSQLFriendly,V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+F.ODBC.Connection!Con.Execute(V.Local.sSQL)
+'make sure header is active
+F.Intrinsic.String.Build("select HOOK from V_HOOK_HEADER where HOOK = '{0}'",V.Local.sHook,V.Local.sSQL)
+F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL, V.Local.sRet)
+F.Intrinsic.Control.If(V.Ambient.ExecuteAndReturnEOF)
+    F.Intrinsic.String.Build("insert into HOOK_HEADER (HOOK, ACTIVE_FLAG, TRACE_FLAG) values ('{0}', 'A', 'N')", V.Local.sHook, V.Local.sSQL)
+F.Intrinsic.Control.Else
+    F.Intrinsic.String.Build("update HOOK_HEADER set ACTIVE_FLAG = 'A' where HOOK = '{0}'", V.Local.sHook, V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+F.ODBC.Connection!Con.Execute(V.Local.sSQL)
+
+F.ODBC.Connection!Con.Close
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Error,"SubRoutine",V.Ambient.CurrentSubroutine,"eNumber",V.Ambient.ErrorNumber,"eDescription",V.Ambient.ErrorDescription)
+F.Intrinsic.Control.EndTry
+Program.Sub.AddHookAssociation.End
+
+Program.Sub.Error.Start
+V.Local.sError.Declare
+V.Local.iRet.Declare
+V.Local.sSep.Declare
+
+F.Intrinsic.String.Build("-------------------------------------------------------------------------------------",,V.Local.sSep)
+F.Intrinsic.String.Build("({5}-{6}){0}{7}{0}Project: {4}{0}{7}{0}Sub: {1}{0}Error: {2}, {3}", V.Ambient.NewLine, V.Args.SubRoutine, V.Args.eNumber, V.Args.eDescription,V.Caller.ScriptFile,V.Ambient.Date, V.Ambient.Time,V.Local.sSep,V.Local.sError)
+F.Intrinsic.UI.Msgbox(V.Local.sError,"Error",V.Local.iRet)
+Program.Sub.Error.End
+
+Program.Sub.Comments.Start
+${$5$}$20.1.8635.26696$}$1
+${$6$}$tsmith$}$20230922100852440$}$xqPbj9atw05FglvzeFsZ9cqXP+qvG6tXeL6gS2oy5EqxqB95FHGWmlvY9YW3iSXiKWNNpHHS+Hw=
+Program.Sub.Comments.End
