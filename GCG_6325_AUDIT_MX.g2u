@@ -1,0 +1,332 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.fmAuditMx..Create(BaseForm)
+Gui.fmAuditMx..Caption("System Audit Mx")
+Gui.fmAuditMx..Size(351,300)
+Gui.fmAuditMx..MinX(0)
+Gui.fmAuditMx..MinY(0)
+Gui.fmAuditMx..Position(0,0)
+Gui.fmAuditMx..AlwaysOnTop(False)
+Gui.fmAuditMx..FontName("Tahoma")
+Gui.fmAuditMx..FontSize(8.25)
+Gui.fmAuditMx..ControlBox(True)
+Gui.fmAuditMx..MaxButton(True)
+Gui.fmAuditMx..MinButton(True)
+Gui.fmAuditMx..MousePointer(0)
+Gui.fmAuditMx..Moveable(True)
+Gui.fmAuditMx..Sizeable(True)
+Gui.fmAuditMx..ShowInTaskBar(True)
+Gui.fmAuditMx..TitleBar(True)
+Gui.fmAuditMx..Event(UnLoad,fmAuditMx_UnLoad)
+Gui.fmAuditMx.lblMsg.Create(Label,"Please select the modules you would like to audit",True,318,16,0,8,8,True,0,"Tahoma",10,,0,0)
+Gui.fmAuditMx.lblMsg.BorderStyle(0)
+Gui.fmAuditMx.lblMsg.FontStyle(True,False,True,False,False)
+Gui.fmAuditMx.chkCustMast.Create(CheckBox)
+Gui.fmAuditMx.chkCustMast.Enabled(True)
+Gui.fmAuditMx.chkCustMast.Visible(True)
+Gui.fmAuditMx.chkCustMast.Zorder(0)
+Gui.fmAuditMx.chkCustMast.Size(140,20)
+Gui.fmAuditMx.chkCustMast.Position(31,34)
+Gui.fmAuditMx.chkCustMast.Caption("Customer Master")
+Gui.fmAuditMx.chkCustMast.FontName("Tahoma")
+Gui.fmAuditMx.chkCustMast.FontSize(10)
+Gui.fmAuditMx.chkCustMast.FontStyle(True,False,False,False,False)
+Gui.fmAuditMx.chkCustMast.ToolTip("This will audit the Customer Master main screen, AR Customer Ship To and Customer Master Taxes.")
+Gui.fmAuditMx.chkVendMast.Create(CheckBox)
+Gui.fmAuditMx.chkVendMast.Enabled(True)
+Gui.fmAuditMx.chkVendMast.Visible(True)
+Gui.fmAuditMx.chkVendMast.Zorder(0)
+Gui.fmAuditMx.chkVendMast.Size(168,20)
+Gui.fmAuditMx.chkVendMast.Position(31,61)
+Gui.fmAuditMx.chkVendMast.Caption("Vendor Master")
+Gui.fmAuditMx.chkVendMast.FontName("Tahoma")
+Gui.fmAuditMx.chkVendMast.FontSize(10)
+Gui.fmAuditMx.chkVendMast.FontStyle(True,False,False,False,False)
+Gui.fmAuditMx.chkVendMast.ToolTip("This will audit the Vendor Master main screen, Options and ACH.")
+Gui.fmAuditMx.chkPartMast.Create(CheckBox)
+Gui.fmAuditMx.chkPartMast.Enabled(True)
+Gui.fmAuditMx.chkPartMast.Visible(True)
+Gui.fmAuditMx.chkPartMast.Zorder(0)
+Gui.fmAuditMx.chkPartMast.Size(140,20)
+Gui.fmAuditMx.chkPartMast.Position(31,89)
+Gui.fmAuditMx.chkPartMast.Caption("Part Master")
+Gui.fmAuditMx.chkPartMast.FontName("Tahoma")
+Gui.fmAuditMx.chkPartMast.FontSize(10)
+Gui.fmAuditMx.chkPartMast.FontStyle(True,False,False,False,False)
+Gui.fmAuditMx.chkPartMast.ToolTip("This will audit the Inventory Master main screen, XRef, Options, Usage as well as Item Master main screen and Lot/Bin User Fields.")
+Gui.fmAuditMx.chkUserSec.Create(CheckBox)
+Gui.fmAuditMx.chkUserSec.Enabled(True)
+Gui.fmAuditMx.chkUserSec.Visible(True)
+Gui.fmAuditMx.chkUserSec.Zorder(0)
+Gui.fmAuditMx.chkUserSec.Size(312,20)
+Gui.fmAuditMx.chkUserSec.Position(31,116)
+Gui.fmAuditMx.chkUserSec.Caption("User Security Maintenance ")
+Gui.fmAuditMx.chkUserSec.FontName("Tahoma")
+Gui.fmAuditMx.chkUserSec.FontSize(10)
+Gui.fmAuditMx.chkUserSec.FontStyle(True,False,False,False,False)
+Gui.fmAuditMx.chkGroupSec.Create(CheckBox)
+Gui.fmAuditMx.chkGroupSec.Enabled(True)
+Gui.fmAuditMx.chkGroupSec.Visible(True)
+Gui.fmAuditMx.chkGroupSec.Zorder(0)
+Gui.fmAuditMx.chkGroupSec.Size(302,20)
+Gui.fmAuditMx.chkGroupSec.Position(31,144)
+Gui.fmAuditMx.chkGroupSec.Caption("Group Security Maintenance ")
+Gui.fmAuditMx.chkGroupSec.FontName("Tahoma")
+Gui.fmAuditMx.chkGroupSec.FontSize(10)
+Gui.fmAuditMx.chkGroupSec.FontStyle(True,False,False,False,False)
+Gui.fmAuditMx.cmdSave.Create(Button)
+Gui.fmAuditMx.cmdSave.Enabled(True)
+Gui.fmAuditMx.cmdSave.Visible(True)
+Gui.fmAuditMx.cmdSave.Zorder(0)
+Gui.fmAuditMx.cmdSave.Size(75,23)
+Gui.fmAuditMx.cmdSave.Position(251,229)
+Gui.fmAuditMx.cmdSave.Caption("Save")
+Gui.fmAuditMx.cmdSave.FontName("Tahoma")
+Gui.fmAuditMx.cmdSave.FontSize(10)
+Gui.fmAuditMx.cmdSave.FontStyle(True,False,False,False,False)
+Gui.fmAuditMx.cmdSave.Event(Click,cmdSave_Click)
+Gui.fmAuditMx.lblPwd.Create(Label,"Password required to purge data:",True,221,16,0,8,180,True,0,"Tahoma",10,,0,0)
+Gui.fmAuditMx.lblPwd.BorderStyle(0)
+Gui.fmAuditMx.lblPwd.FontStyle(True,False,True,False,False)
+Gui.fmAuditMx.txtPWD.Create(TextBox,"",True,224,20,0,8,200,True,0,"Tahoma",8.25,,1)
+Gui.fmAuditMx.txtPWD.PasswordChar("*")
+Gui.fmAuditMx.chkVwPwd.Create(CheckBox)
+Gui.fmAuditMx.chkVwPwd.Enabled(True)
+Gui.fmAuditMx.chkVwPwd.Visible(True)
+Gui.fmAuditMx.chkVwPwd.Zorder(0)
+Gui.fmAuditMx.chkVwPwd.Size(64,20)
+Gui.fmAuditMx.chkVwPwd.Position(236,200)
+Gui.fmAuditMx.chkVwPwd.Caption("View")
+Gui.fmAuditMx.chkVwPwd.FontName("Tahoma")
+Gui.fmAuditMx.chkVwPwd.FontSize(10)
+Gui.fmAuditMx.chkVwPwd.FontStyle(True,False,False,False,False)
+Gui.fmAuditMx.chkVwPwd.Event(Change,chkVwPwd_Change)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.External.Include.Library("GCG_6325_HOOK_ASSOC.lib")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.Try
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+'TJS, Apr 2021
+'Customer: CDI Energy Products
+'Quote # 12639
+'Maintenance program to allow customer to select modules to audit.
+V.Local.sOptions.Declare
+V.Local.sPwd.Declare
+
+F.ODBC.Connection!conts.OpenCompanyConnection
+	F.ODBC.Connection!conts.ExecuteAndReturn("Select CUST_MASTER,VEND_MASTER,PART_MASTER,USER_SEC_MX,GROUP_SEC_MX from GCG_6325_AUDIT_MX where REC_ID = '1'",V.Local.sOptions)
+F.ODBC.Connection!conts.Close
+
+F.Intrinsic.Control.If(V.Local.sOptions.Trim,<>,"")	
+	F.Intrinsic.String.Split(V.Local.sOptions,"*!*",V.Local.sOptions)
+	
+	Gui.fmAuditMx.chkCustMast.Value(V.Local.sOptions(0))
+	Gui.fmAuditMx.chkVendMast.Value(V.Local.sOptions(1))
+	Gui.fmAuditMx.chkPartMast.Value(V.Local.sOptions(2))
+	Gui.fmAuditMx.chkUserSec.Value(V.Local.sOptions(3))
+	Gui.fmAuditMx.chkGroupSec.Value(V.Local.sOptions(4))
+F.Intrinsic.Control.EndIf
+
+Gui.fmAuditMx.chkVwPwd.Value(0)
+
+F.Global.Registry.ReadValue("6325",V.Caller.CompanyCode,"GCG_6325_AUDIT_MX",6325,1000,6,"",V.Local.sPwd.Trim)
+
+Gui.fmAuditMx.txtPWD.Text(V.Local.sPwd)
+
+Gui.fmAuditMx..Show
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Error,"SubRoutine",V.Ambient.CurrentSubroutine,"eNumber",V.Ambient.ErrorNumber,"eDescription",V.Ambient.ErrorDescription)
+F.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.cmdSave_Click.Start
+F.Intrinsic.Control.Try
+V.Local.iCustMast.Declare
+V.Local.iVendMast.Declare
+V.Local.iPartMast.Declare
+V.Local.iUserSec.Declare
+V.Local.iGroupSec.Declare
+V.Local.sSQL.Declare
+V.Local.sPwd.Declare
+
+V.Local.iCustMast.Set(V.Screen.fmAuditMx!chkCustMast.Value)
+V.Local.iVendMast.Set(V.Screen.fmAuditMx!chkVendMast.Value)
+V.Local.iPartMast.Set(V.Screen.fmAuditMx!chkPartMast.Value)
+V.Local.iUserSec.Set(V.Screen.fmAuditMx!chkUserSec.Value)
+V.Local.iGroupSec.Set(V.Screen.fmAuditMx!chkGroupSec.Value)
+
+V.Local.sPwd.Set(V.Screen.fmAuditMx!txtPWD.Text.Trim)
+
+F.ODBC.Connection!conts.OpenCompanyConnection
+F.ODBC.Connection!conts.ExecuteAndReturn("Select * from GCG_6325_AUDIT_MX where REC_ID = '1'",V.Local.sSQL)
+
+F.Intrinsic.Control.If(V.Local.sSQL.Trim,=,"")
+	F.Intrinsic.String.Build("Insert into GCG_6325_AUDIT_MX (REC_ID,CUST_MASTER,VEND_MASTER,PART_MASTER,USER_SEC_MX,GROUP_SEC_MX) values('1','{0}','{1}','{2}','{3}','{4}')",V.Local.iCustMast,V.Local.iVendMast,V.Local.iPartMast,V.Local.iUserSec,V.Local.iGroupSec,V.Local.sSQL)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("Update GCG_6325_AUDIT_MX set CUST_MASTER = '{0}',VEND_MASTER = '{1}',PART_MASTER = '{2}',USER_SEC_MX = '{3}',GROUP_SEC_MX = '{4}' where REC_ID = '1'",V.Local.iCustMast,V.Local.iVendMast,V.Local.iPartMast,V.Local.iUserSec,V.Local.iGroupSec,V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!conts.Execute(V.Local.sSQL)
+
+F.Intrinsic.Control.CallSub(SetHookAssoc)
+	
+F.ODBC.Connection!conts.Close
+
+F.Global.Registry.AddValue("6325",V.Caller.CompanyCode,"GCG_6325_AUDIT_MX",6325,1000,True,"",False,0,0.00,"1/1/1900","12:00:00 AM",V.Local.sPwd.Trim)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Error,"SubRoutine",V.Ambient.CurrentSubroutine,"eNumber",V.Ambient.ErrorNumber,"eDescription",V.Ambient.ErrorDescription)
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdSave_Click.End
+
+Program.Sub.SetHookAssoc.Start
+F.Intrinsic.Control.Try
+V.Local.iTemp.Declare
+V.Local.sHooks.Declare
+V.Local.sSQL.Declare
+V.Local.iCnt.Declare
+
+Gui.fmAuditMx..Enabled(False)
+
+'Customer Master 
+V.Local.iTemp.Set(V.Screen.fmAuditMx!chkCustMast.Value)
+F.Intrinsic.String.Build("14385*!*14386*!*14387*!*14410*!*14443*!*14445*!*56400*!*56410*!*56420",,V.Local.sHooks)
+
+F.Intrinsic.Control.If(V.Local.iTemp,=,1)
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.Control.CallSub(AddHookAssociation,"HOOK",V.Local.sHooks(V.Local.iCnt),"SCRIPT","GCG_6325_SYS_AUDIT.g2u","ASYNCHRONOUS","S","NOTES","Maintained at System Support > Administration > System Audit Mx (6325)")
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.String.LPad(V.Local.sHooks(V.Local.iCnt),"0",9,V.Local.sHooks(V.Local.iCnt))
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	F.Intrinsic.String.Join(V.Local.sHooks,"','",V.Local.sHooks)
+	
+	F.Intrinsic.String.Build("Update HOOK_ASSOCIATION set ACTIVE_FLAG = 'N' where ID in ('{0}') and SCRIPT_NAME = 'GCG_6325_SYS_AUDIT.g2u'",V.Local.sHooks,V.Local.sSQL)
+
+	F.ODBC.Connection!conts.Execute(V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+
+'Vendor Master
+V.Local.iTemp.Set(V.Screen.fmAuditMx!chkVendMast.Value) 
+F.Intrinsic.String.Build("14461*!*14468*!*14470*!*14471*!*14475*!*14501*!*14508*!*14503*!*42305*!*42310*!*42312*!*42314",,V.Local.sHooks)
+
+F.Intrinsic.Control.If(V.Local.iTemp,=,1)
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.Control.CallSub(AddHookAssociation,"HOOK",V.Local.sHooks(V.Local.iCnt),"SCRIPT","GCG_6325_SYS_AUDIT.g2u","ASYNCHRONOUS","S","NOTES","Maintained at System Support > Administration > System Audit Mx (6325)")
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.String.LPad(V.Local.sHooks(V.Local.iCnt),"0",9,V.Local.sHooks(V.Local.iCnt))
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	F.Intrinsic.String.Join(V.Local.sHooks,"','",V.Local.sHooks)
+	
+	F.Intrinsic.String.Build("Update HOOK_ASSOCIATION set ACTIVE_FLAG = 'N' where ID in ('{0}') and SCRIPT_NAME = 'GCG_6325_SYS_AUDIT.g2u'",V.Local.sHooks,V.Local.sSQL)
+
+	F.ODBC.Connection!conts.Execute(V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+
+'Part Master
+V.Local.iTemp.Set(V.Screen.fmAuditMx!chkPartMast.Value)
+F.Intrinsic.String.Build("10125*!*10185*!*10180*!*13080*!*13160*!*13280*!*13290*!*13301*!*15600*!*15615*!*15640*!*15660*!*44910*!*44950*!*44960*!*10234*!*10238*!*10239",,V.Local.sHooks)
+
+F.Intrinsic.Control.If(V.Local.iTemp,=,1)
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.Control.CallSub(AddHookAssociation,"HOOK",V.Local.sHooks(V.Local.iCnt),"SCRIPT","GCG_6325_SYS_AUDIT.g2u","ASYNCHRONOUS","S","NOTES","Maintained at System Support > Administration > System Audit Mx (6325)")
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.String.LPad(V.Local.sHooks(V.Local.iCnt),"0",9,V.Local.sHooks(V.Local.iCnt))
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	F.Intrinsic.String.Join(V.Local.sHooks,"','",V.Local.sHooks)
+
+	F.Intrinsic.String.Build("Update HOOK_ASSOCIATION set ACTIVE_FLAG = 'N' where ID in ('{0}') and SCRIPT_NAME = 'GCG_6325_SYS_AUDIT.g2u'",V.Local.sHooks,V.Local.sSQL)
+
+	F.ODBC.Connection!conts.Execute(V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+'User Security Maintenance - Includes provisions for System Support > File > User Security by Menu Item
+V.Local.iTemp.Set(V.Screen.fmAuditMx!chkUserSec.Value)
+F.Intrinsic.String.Build("33708*!*33709*!*33716*!*33717*!*33720*!*33721*!*33714*!*33715*!*33724*!*33725*!*33105*!*34105*!*34110*!*34130*!*56761*!*56763*!*33730*!*33732*!*33733",,V.Local.sHooks)
+
+F.Intrinsic.Control.If(V.Local.iTemp,=,1)
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.Control.CallSub(AddHookAssociation,"HOOK",V.Local.sHooks(V.Local.iCnt),"SCRIPT","GCG_6325_SYS_AUDIT.g2u","ASYNCHRONOUS","S","NOTES","Maintained at System Support > Administration > System Audit Mx (6325)")
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.String.LPad(V.Local.sHooks(V.Local.iCnt),"0",9,V.Local.sHooks(V.Local.iCnt))
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	F.Intrinsic.String.Join(V.Local.sHooks,"','",V.Local.sHooks)
+	
+	F.Intrinsic.String.Build("Update HOOK_ASSOCIATION set ACTIVE_FLAG = 'N' where ID in ('{0}') and SCRIPT_NAME = 'GCG_6325_SYS_AUDIT.g2u'",V.Local.sHooks,V.Local.sSQL)
+
+	F.ODBC.Connection!conts.Execute(V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+
+'Group Security Maintenance
+V.Local.iTemp.Set(V.Screen.fmAuditMx!chkGroupSec.Value)
+F.Intrinsic.String.Build("33710*!*33711*!*33718*!*33719*!*33722*!*33723*!*33712*!*33713*!*33726*!*33727*!*33728*!*33729",,V.Local.sHooks)
+
+F.Intrinsic.Control.If(V.Local.iTemp,=,1)
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.Control.CallSub(AddHookAssociation,"HOOK",V.Local.sHooks(V.Local.iCnt),"SCRIPT","GCG_6325_SYS_AUDIT.g2u","ASYNCHRONOUS","S","NOTES","Maintained at System Support > Administration > System Audit Mx (6325)")
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sHooks,"*!*",V.Local.sHooks)
+	F.Intrinsic.Control.For(V.Local.iCnt,V.Local.sHooks.LBound,V.Local.sHooks.UBound,1)
+		F.Intrinsic.String.LPad(V.Local.sHooks(V.Local.iCnt),"0",9,V.Local.sHooks(V.Local.iCnt))
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	F.Intrinsic.String.Join(V.Local.sHooks,"','",V.Local.sHooks)
+	
+	F.Intrinsic.String.Build("Update HOOK_ASSOCIATION set ACTIVE_FLAG = 'N' where ID in ('{0}') and SCRIPT_NAME = 'GCG_6325_SYS_AUDIT.g2u'",V.Local.sHooks,V.Local.sSQL)
+
+	F.ODBC.Connection!conts.Execute(V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+
+Gui.fmAuditMx..Enabled(True)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Error,"SubRoutine",V.Ambient.CurrentSubroutine,"eNumber",V.Ambient.ErrorNumber,"eDescription",V.Ambient.ErrorDescription)
+F.Intrinsic.Control.EndTry
+Program.Sub.SetHookAssoc.End
+
+Program.Sub.chkVwPwd_Change.Start
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.If(V.Screen.fmAuditMx!chkVwPwd.Value,=,0)
+	Gui.fmAuditMx.txtPWD.PasswordChar("*")
+F.Intrinsic.Control.Else
+	Gui.fmAuditMx.txtPWD.PasswordChar("")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Error,"SubRoutine",V.Ambient.CurrentSubroutine,"eNumber",V.Ambient.ErrorNumber,"eDescription",V.Ambient.ErrorDescription)
+F.Intrinsic.Control.EndTry
+Program.Sub.chkVwPwd_Change.End
+
+Program.Sub.fmAuditMx_UnLoad.Start
+F.Intrinsic.Control.End
+Program.Sub.fmAuditMx_UnLoad.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$tsmith$}$20220628085132352$}$xqPbj9atw05FglvzeFsZ9cqXP+qvG6tXFz1Hi6OJjjwVi5MybBnT7Zwtp/sDBKft5vFsQlhmXf0=
+Program.Sub.Comments.End
